@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - Karim Abdel Sadek</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='8' y='28' width='48' height='6' rx='2' fill='%23a0522d'/><rect x='8' y='38' width='48' height='4' rx='1' fill='%238b4513'/><rect x='8' y='44' width='48' height='4' rx='1' fill='%238b4513'/><rect x='12' y='48' width='4' height='12' fill='%23654321'/><rect x='48' y='48' width='4' height='12' fill='%23654321'/><rect x='4' y='20' width='4' height='30' rx='1' fill='%23654321'/><rect x='56' y='20' width='4' height='30' rx='1' fill='%23654321'/><rect x='4' y='18' width='56' height='4' rx='2' fill='%23a0522d'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Karim Abdel Sadek</a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="publications.html">Publications</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="section publications-page">
+            <h2>Publications</h2>
+
+            <div class="year-divider">2025</div>
+
+            <div class="publication">
+                <img src="images/gmg.png" alt="Goal Misgeneralization" class="pub-image">
+                <div class="pub-content">
+                    <h3>Mitigating Goal Misgeneralization via Minimax Regret</h3>
+                    <p class="authors"><strong>Karim Abdel Sadek*</strong>, Matthew Farrugia-Roberts*, Usman Anwar, Hannah Erlebach, Christian Schroeder de Witt, David Krueger, Michael Dennis</p>
+                    <p class="venue">RLC 2025</p>
+                    <p class="tldr"><strong>TL;DR:</strong> We use minimax regret to train RL agents that are robust to goal misgeneralization.</p>
+                    <button class="abstract-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        Abstract
+                    </button>
+                    <div class="abstract-content">
+                        Safe generalization in reinforcement learning requires not only that a learned policy acts capably in new situations, but also that it uses its capabilities towards the pursuit of the designer's intended goal. The latter requirement may fail when a proxy goal incentivizes similar behavior to the intended goal within the training environment, but not in novel deployment environments. This creates the risk that policies will behave as if in pursuit of the proxy goal, rather than the intended goal, in deployment—a phenomenon known as goal misgeneralization. In this paper, we formalize this problem setting in order to theoretically study the possibility of goal misgeneralization under different training objectives. We show that goal misgeneralization is possible under approximate optimization of the maximum expected value (MEV) objective, but not the minimax expected regret (MMER) objective. We then empirically show that the standard MEV-based training method of domain randomization exhibits goal misgeneralization in procedurally-generated grid-world environments, whereas current regret-based unsupervised environment design (UED) methods are more robust to goal misgeneralization (though they don't find MMER policies in all cases). Our findings suggest that minimax expected regret is a promising approach to mitigating goal misgeneralization.
+                    </div>
+                    <div class="pub-links">
+                        <a href="https://www.arxiv.org/pdf/2507.03068"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>Paper</a>
+                        <a href="https://github.com/matomatical/jaxgmg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code</a>
+                        <a href="https://docs.google.com/presentation/d/1FX3MnfKo9PInWab5yIrKakMpAdfev7MFkOWsAXgtcEs/edit?usp=sharing"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>Slides</a>
+                        <a href="https://docs.google.com/presentation/d/16ODI2b3xTaSZ-wTpGtuupLXRx29wrEIp0utGAZFtQ5Q/edit?usp=sharing"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>Poster</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="year-divider">2024</div>
+
+            <div class="publication">
+                <img src="images/early.png" alt="Dynamic Vocabulary Pruning" class="pub-image">
+                <div class="pub-content">
+                    <h3>Dynamic Vocabulary Pruning in Early-Exit LLMs</h3>
+                    <p class="authors">Jort Vincenti*, <strong>Karim Abdel Sadek*</strong>, Joan Velja*, Matteo Nulli*, Metod Jazbec</p>
+                    <p class="venue">ENLSP Workshop, NeurIPS 2024</p>
+                    <p class="tldr"><strong>TL;DR:</strong> We propose dynamic vocabulary pruning to accelerate early-exit LLMs while maintaining performance.</p>
+                    <button class="abstract-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        Abstract
+                    </button>
+                    <div class="abstract-content">
+                        Increasing the size of large language models (LLMs) has been shown to lead to better performance. However, this comes at the cost of slower and more expensive inference. Early-exiting is a promising approach for improving the efficiency of LLM inference by enabling next token prediction at intermediate layers. Yet, the large vocabulary size in modern LLMs makes the confidence estimation required for exit decisions computationally expensive, diminishing the efficiency gains. To address this, we propose dynamically pruning the vocabulary at test time for each token. Specifically, the vocabulary is pruned at one of the initial layers, and the smaller vocabulary is then used throughout the rest of the forward pass. Our experiments demonstrate that such post-hoc dynamic vocabulary pruning improves the efficiency of confidence estimation in early-exit LLMs while maintaining competitive performance.
+                    </div>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/pdf/2410.18952"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>Paper</a>
+                        <a href="https://github.com/MatteoNulli/Vocabulary_pruning/tree/main"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="publication">
+                <img src="images/mts.png" alt="Caching and MTS" class="pub-image">
+                <div class="pub-content">
+                    <h3>Algorithms for Caching and MTS with reduced number of predictions</h3>
+                    <p class="authors"><strong>Karim Abdel Sadek</strong>, Marek Eliáš</p>
+                    <p class="venue">ICLR 2024</p>
+                    <p class="tldr"><strong>TL;DR:</strong> We design online algorithms that achieve optimal consistency-robustness tradeoffs using only a reduced number of predictions.</p>
+                    <button class="abstract-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        Abstract
+                    </button>
+                    <div class="abstract-content">
+                        ML-augmented algorithms utilize predictions to achieve performance beyond their worst-case bounds. Producing these predictions might be a costly operation – this motivated Im et al. (2022) to introduce the study of algorithms which use predictions parsimoniously. We design parsimonious algorithms for caching and MTS with action predictions, proposed by Antoniadis et al. (2023), focusing on the parameters of consistency (performance with perfect predictions) and smoothness (dependence of their performance on the prediction error). Our algorithm for caching is 1-consistent, robust, and its smoothness deteriorates with the decreasing number of available predictions. We propose an algorithm for general MTS whose consistency and smoothness both scale linearly with the decreasing number of predictions. Without the restriction on the number of available predictions, both algorithms match the earlier guarantees achieved by Antoniadis et al. (2023).
+                    </div>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/pdf/2404.06280"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>Paper</a>
+                        <a href="https://openreview.net/forum?id=QuIiLSktO4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Reviews</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="publication">
+                <img src="images/rl_reprod.png" alt="RL Reproducibility Study" class="pub-image">
+                <div class="pub-content">
+                    <h3>'Explaining RL Decisions with Trajectories': A Reproducibility Study</h3>
+                    <p class="authors"><strong>Karim Abdel Sadek</strong>, Matteo Nulli, Joan Velja, Jort Vincenti</p>
+                    <p class="venue">TMLR 2024</p>
+                    <p class="tldr"><strong>TL;DR:</strong> We reproduce and extend a method for explaining RL agent decisions using trajectory-based analysis.</p>
+                    <button class="abstract-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        Abstract
+                    </button>
+                    <div class="abstract-content">
+                        This work investigates the reproducibility of the paper "Explaining RL decisions with trajectories" by Deshmukh et al. (2023). The original paper introduces a novel approach in explainable reinforcement learning based on the attribution decisions of an agent to specific clusters of trajectories encountered during training. We verify the main claims from the paper, which state that (i) training on less trajectories induces a lower initial state value, (ii) trajectories in a cluster present similar high-level patterns, (iii) distant trajectories influence the decision of an agent, and (iv) humans correctly identify the attributed trajectories to the decision of the agent. We recover the environments used by the authors based on the partial original code they provided for one of the environments (Grid-World), and implemented the remaining from scratch (Seaquest and HalfCheetah, Breakout, Q*Bert). While we confirm that (i), (ii), and (iii) partially hold, we extend on the largely qualitative experiments from the authors by introducing a quantitative metric to further support (iii), and new experiments and visual results for (i). Moreover, we investigate the use of different clustering algorithms and encoder architectures to further support (ii). We could not support (iv), given the limited extent of the original experiments. We conclude that, while some of the claims can be supported, further investigations and experiments could be of interest. We recognize the novelty of the work from the authors and hope that our work paves the way for clearer and more transparent approaches.
+                    </div>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/pdf/2411.07200"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>Paper</a>
+                        <a href="https://github.com/karim-abdel/Explaining-RL-Decisions-with-Trajectories"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>Code</a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Karim Abdel Sadek</p>
+    </footer>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

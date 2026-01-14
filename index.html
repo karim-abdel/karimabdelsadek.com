@@ -138,8 +138,19 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2025 Karim Abdel Sadek</p>
+        <p>&copy; 2025 Karim Abdel Sadek <span id="bench" title="Just a bench..."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="18" height="18" style="vertical-align: middle; margin-left: 4px;"><rect x="8" y="28" width="48" height="6" rx="2" fill="currentColor" opacity="0.6"/><rect x="8" y="38" width="48" height="4" rx="1" fill="currentColor" opacity="0.5"/><rect x="8" y="44" width="48" height="4" rx="1" fill="currentColor" opacity="0.5"/><rect x="12" y="48" width="4" height="12" fill="currentColor" opacity="0.4"/><rect x="48" y="48" width="4" height="12" fill="currentColor" opacity="0.4"/><rect x="4" y="20" width="4" height="30" rx="1" fill="currentColor" opacity="0.4"/><rect x="56" y="20" width="4" height="30" rx="1" fill="currentColor" opacity="0.4"/><rect x="4" y="18" width="56" height="4" rx="2" fill="currentColor" opacity="0.6"/></svg></span></p>
     </footer>
+
+    <!-- Forrest Gump Easter Egg -->
+    <div id="gump-overlay" class="gump-overlay hidden">
+        <div class="gump-quote">
+            <p id="gump-quote-text"></p>
+            <span class="gump-attribution">— Forrest Gump</span>
+            <p class="gump-easter-note">A little easter egg about my favorite movie, Forrest Gump :) Click anywhere to close!</p>
+            <span class="gump-close" onclick="toggleGumpMode()">×</span>
+        </div>
+    </div>
+    <div id="feather" class="feather hidden">🪶</div>
 
     <script>
         // Mobile navigation toggle
@@ -171,6 +182,48 @@
                     });
                 }
             });
+        });
+
+        // 🪑 Forrest Gump Easter Egg
+        const bench = document.getElementById('bench');
+        const overlay = document.getElementById('gump-overlay');
+        const feather = document.getElementById('feather');
+        const quoteText = document.getElementById('gump-quote-text');
+        let gumpMode = false;
+
+        const gumpQuotes = [
+            "My mama always said, life is like a box of chocolates. You never know what you're gonna get.",
+            "Stupid is as stupid does.",
+            "Run, Forrest, run!",
+            "My mama always said, dying was a part of life. I sure wish it wasn't.",
+            "I'm not a smart man, but I know what love is.",
+            "Mama always said life was like a box of chocolates. You never know what you're gonna get.",
+            "That's all I have to say about that.",
+            "Me and Jenny goes together like peas and carrots.",
+            "I gotta find Bubba!"
+        ];
+
+        bench.addEventListener('click', toggleGumpMode);
+
+        function toggleGumpMode() {
+            gumpMode = !gumpMode;
+            document.body.classList.toggle('gump-mode', gumpMode);
+            overlay.classList.toggle('hidden', !gumpMode);
+            feather.classList.toggle('hidden', !gumpMode);
+
+            if (gumpMode) {
+                quoteText.textContent = '"' + gumpQuotes[Math.floor(Math.random() * gumpQuotes.length)] + '"';
+                feather.style.animation = 'none';
+                feather.offsetHeight;
+                feather.style.animation = 'float-feather 8s ease-in-out forwards';
+            }
+        }
+
+        // Close when clicking overlay background
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                toggleGumpMode();
+            }
         });
     </script>
 </body>

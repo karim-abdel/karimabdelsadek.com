@@ -866,3 +866,160 @@ body::after {
         max-height: 140px;
     }
 }
+
+/* 🪑 Forrest Gump Easter Egg */
+#bench {
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.3s, transform 0.3s;
+    display: inline-block;
+}
+
+#bench:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+#bench svg {
+    transition: transform 0.3s;
+}
+
+#bench:hover svg {
+    transform: scale(1.1);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Gump Mode - Cinematic Vintage Theme */
+.gump-mode {
+    filter: sepia(0.25) saturate(1.05) brightness(1.03);
+    transition: filter 0.6s ease;
+}
+
+.gump-mode .navbar {
+    background: rgba(252, 248, 242, 0.95) !important;
+}
+
+/* Quote Overlay */
+.gump-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(100, 70, 45, 0.82), rgba(60, 40, 25, 0.88));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: gumpFadeIn 0.5s ease;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+}
+
+.gump-quote {
+    background: linear-gradient(165deg, #fffefb 0%, #faf6f0 100%);
+    border: none;
+    border-radius: 14px;
+    padding: 2.5rem 2.5rem 1.75rem;
+    max-width: 520px;
+    margin: 0 1.5rem;
+    text-align: center;
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.7);
+    position: relative;
+    font-family: 'Playfair Display', Georgia, serif;
+    cursor: default;
+}
+
+.gump-quote p#gump-quote-text {
+    font-size: 1.35rem;
+    font-style: italic;
+    color: #5a4838;
+    line-height: 1.75;
+    margin: 0 0 0.75rem 0;
+}
+
+.gump-attribution {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: #7a6a5a;
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+}
+
+.gump-easter-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: #9a8a7a;
+    margin: 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(140, 120, 100, 0.2);
+    font-style: normal;
+}
+
+.gump-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 1.3rem;
+    color: #c8b8a8;
+    cursor: pointer;
+    transition: color 0.2s;
+    font-family: sans-serif;
+}
+
+.gump-close:hover {
+    color: #7a6a5a;
+}
+
+/* Floating Feather */
+.feather {
+    position: fixed;
+    font-size: 4rem;
+    z-index: 2001;
+    pointer-events: none;
+    top: -80px;
+    left: 10%;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+@keyframes float-feather {
+    0% {
+        top: -80px;
+        left: 15%;
+        transform: rotate(0deg) translateX(0);
+        opacity: 1;
+    }
+    20% {
+        left: 35%;
+        transform: rotate(30deg) translateX(40px);
+    }
+    40% {
+        left: 20%;
+        transform: rotate(-25deg) translateX(-30px);
+    }
+    60% {
+        left: 45%;
+        transform: rotate(45deg) translateX(50px);
+    }
+    80% {
+        left: 30%;
+        transform: rotate(-15deg) translateX(-15px);
+    }
+    100% {
+        top: calc(100vh + 80px);
+        left: 40%;
+        transform: rotate(70deg) translateX(30px);
+        opacity: 0.5;
+    }
+}
+
+@keyframes gumpFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

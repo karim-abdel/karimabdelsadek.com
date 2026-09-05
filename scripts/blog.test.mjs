@@ -111,12 +111,13 @@ test('Home stacks its name above unique profile links; Home and Publications use
     assert.doesNotMatch(home, /<h[1-6][^>]*>\s*hi\s*<\/h[1-6]>/i);
     const profileLinks = [
         ['mailto:karimabdel@berkeley.edu', 'Email'],
-        ['https://scholar.google.com/citations?view_op=search_authors&amp;mauthors=Karim+Abdel+Sadek&amp;hl=en', 'Google Scholar'],
+        ['https://scholar.google.com/citations?hl=en&amp;user=mopk5EAAAAAJ', 'Google Scholar'],
         ['https://twitter.com/Karim_abdelll', 'Twitter'],
         ['KarimAbdelSadek_CV.pdf', 'CV']
     ];
     const anchors = [...heading.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)].map(([, href, label]) => [href, label]);
     assert.deepEqual(anchors, profileLinks);
+    assert.doesNotMatch(home, /search_authors|mauthors=/, 'Google Scholar opens the supplied profile, not an author search');
     for (const [href] of profileLinks) {
         assert.equal(home.split(`href="${href}"`).length - 1, 1, `${href} appears once on Home`);
         assert.ok(!publications.includes(`href="${href}"`), `${href} is not repeated on Publications`);

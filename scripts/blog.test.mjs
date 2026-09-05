@@ -147,7 +147,7 @@ test('Home presents introduction, research, background, and contact without dupl
     assert.ok(about, 'homepage biography is present');
     const paragraphs = [...about.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/g)].map(([, content]) => content);
     assert.equal(paragraphs.length, 4, 'biography has the four requested paragraphs');
-    assert.match(paragraphs[0], /^I am a first year CS PhD student/);
+    assert.match(paragraphs[0], /^I am a second-year CS PhD student/);
     assert.match(paragraphs[0], /at UC Berkeley\./);
     assert.match(paragraphs[1], /^I am broadly interested in/);
     assert.deepEqual([...paragraphs[1].matchAll(/<strong>([^<]+)<\/strong>/g)].map(([, interest]) => interest), [

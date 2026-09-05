@@ -5,7 +5,7 @@
 Personal, pencilled, unhurried. A small researcher's page, not a landing-page template.
 Visitors are reading on a laptop in a bright office or on a phone between meetings;
 use soft sage with dark green ink and moss-green links. The color strategy is restrained.
-Restore the preferred narrow structure; distinguish it through type and tone.
+Keep the preferred stacked structure, with a centered reading column and balanced side margins.
 
 ## Typography and color
 
@@ -21,8 +21,8 @@ Restore the preferred narrow structure; distinguish it through type and tone.
 
 ## Layout and shared elements
 
-- 560px single column, 120px left margin and 56px top margin on desktop.
-- At 800px and below, use 24px side margins and 36px top margin.
+- 680px single column, horizontally centered with automatic side margins and a 64px top margin on desktop. Text remains left-aligned.
+- At 800px and below, keep automatic side margins and use a 36px top margin. The column shrinks to preserve at least 24px on either side.
 - Shared plain navigation: Home and Publications only. No separate brand masthead. The blog and CV remain available without top-nav links.
 - `.page-heading`: stacked small portrait, name, and profile links on Home; title and optional date on other pages. The side-by-side name/links experiment was not preferred.
 - The sole profile-links row contains Email, Google Scholar, Twitter, and CV, below the name and above the biography. Keep it left-aligned with an 18px top margin and natural wrapping on narrow screens. No duplicated profile links below the prose, on the publications page, or in footers.

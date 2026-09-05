@@ -148,6 +148,7 @@ test('Home presents introduction, research, background, and contact without dupl
     const paragraphs = [...about.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/g)].map(([, content]) => content);
     assert.equal(paragraphs.length, 4, 'biography has the four requested paragraphs');
     assert.match(paragraphs[0], /^I am a first year CS PhD student/);
+    assert.match(paragraphs[0], /at UC Berkeley\./);
     assert.match(paragraphs[1], /^I am broadly interested in/);
     assert.deepEqual([...paragraphs[1].matchAll(/<strong>([^<]+)<\/strong>/g)].map(([, interest]) => interest), [
         'Reinforcement Learning', 'Cooperative AI', 'AI Safety'
@@ -159,7 +160,15 @@ test('Home presents introduction, research, background, and contact without dupl
     for (const name of ['Marek Eliáš', 'Georgia Tech', 'David Krueger', 'Michael Dennis', 'Micah Carroll']) {
         assert.ok(background.includes(name), `${name} is retained in the background`);
     }
-    assert.match(paragraphs[2], /<a href="https:\/\/[^\"]*unibocconi\.it[^\"]*">Bocconi University<\/a>/);
+    assert.match(paragraphs[2], /at Bocconi University, where/);
+    const biographyLinks = [...about.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/g)]
+        .map(([, label]) => label.replace(/<[^>]+>/g, '').trim());
+    for (const label of biographyLinks) {
+        assert.doesNotMatch(label, /\b(?:UC Berkeley|Bocconi University)\b/, 'university names are plain text, not links');
+    }
+    assert.match(paragraphs[0], /<a href="https:\/\/people\.eecs\.berkeley\.edu\/~russell\/">Stuart Russell<\/a>/);
+    assert.match(paragraphs[0], /<a href="https:\/\/humancompatible\.ai\/">CHAI<\/a>/);
+    assert.match(paragraphs[0], /<a href="https:\/\/bair\.berkeley\.edu\/">BAIR<\/a>/);
     assert.match(paragraphs[3], /^Please reach out/);
     assert.match(paragraphs[3], /karimabdel at berkeley dot edu/);
     assert.match(paragraphs[3], /<a href="undergraduate-research\.html"[^>]*>read this<\/a>/);
@@ -200,6 +209,7 @@ test('Home keeps two papers with titles followed by grouped authors and venues, 
         const metadata = entry.match(/^\s*<h3 class="paper-title">\s*<a href="([^"]+)"[^>]*>([^<]+)<\/a>\s*<\/h3>\s*<div class="paper-meta">\s*<p class="paper-authors">([\s\S]*?)<\/p>\s*<p class="paper-venue">([\s\S]*?)<\/p>\s*<\/div>\s*$/);
         assert.ok(metadata, 'each title precedes one metadata group containing authors then conference');
         const [, href, title, authors, venue] = metadata;
+        assert.match(href, /^https:\/\/arxiv\.org\/abs\/\d{4}\.\d{5}$/, 'selected paper title opens its canonical arXiv abstract page');
         const record = records.find(publication => publication.title?.[1] === href);
         assert.ok(record, `${title} links to the same paper as its Publications record`);
         assert.equal(title, record.title[2], 'selected paper retains its full title');
@@ -220,10 +230,10 @@ test('Publications retain five compact paper records and correct contribution st
     assert.equal(papers.length, 5);
     const starredAuthorsByPaper = new Map([
         ['https://arxiv.org/abs/2605.09217', ['Karim Abdel Sadek*', 'Mark Bedaywi*', 'Rhys Gould*']],
-        ['https://www.arxiv.org/pdf/2507.03068', ['Karim Abdel Sadek*', 'Matthew Farrugia-Roberts*']],
-        ['https://arxiv.org/pdf/2410.18952', ['Jort Vincenti*', 'Karim Abdel Sadek*', 'Joan Velja*', 'Matteo Nulli*']],
-        ['https://arxiv.org/pdf/2404.06280', []],
-        ['https://arxiv.org/pdf/2411.07200', []]
+        ['https://arxiv.org/abs/2507.03068', ['Karim Abdel Sadek*', 'Matthew Farrugia-Roberts*']],
+        ['https://arxiv.org/abs/2410.18952', ['Jort Vincenti*', 'Karim Abdel Sadek*', 'Joan Velja*', 'Matteo Nulli*']],
+        ['https://arxiv.org/abs/2404.06280', []],
+        ['https://arxiv.org/abs/2411.07200', []]
     ]);
     const expectedRecords = [
         {
@@ -237,7 +247,7 @@ test('Publications retain five compact paper records and correct contribution st
             authors: 'Karim Abdel Sadek*, Matthew Farrugia-Roberts*, Usman Anwar, Hannah Erlebach, Christian Schroeder de Witt, David Krueger, Michael Dennis',
             venue: 'RLC 2025',
             resources: [
-                ['https://www.arxiv.org/pdf/2507.03068', 'Paper'],
+                ['https://arxiv.org/pdf/2507.03068', 'Paper'],
                 ['https://github.com/matomatical/jaxgmg', 'Code'],
                 ['https://docs.google.com/presentation/d/1FX3MnfKo9PInWab5yIrKakMpAdfev7MFkOWsAXgtcEs/edit?usp=sharing', 'Slides'],
                 ['https://docs.google.com/presentation/d/16ODI2b3xTaSZ-wTpGtuupLXRx29wrEIp0utGAZFtQ5Q/edit?usp=sharing', 'Poster']
@@ -276,12 +286,16 @@ test('Publications retain five compact paper records and correct contribution st
             .map(([, href, label]) => [href, label])
     }));
     assert.deepEqual(actualRecords, expectedRecords, 'all titles, full author lists, venues, and resource links are preserved in order');
-    for (const paper of papers) {
+    for (const [index, paper] of papers.entries()) {
         assert.match(paper, /^\s*<h3>[\s\S]*?<\/h3>\s*<p class="authors">[\s\S]*?<\/p>\s*<p class="venue">[\s\S]*?<\/p>\s*<div class="pub-links">[\s\S]*?<\/div>\s*$/, 'each record contains only title, authors, venue, and resource links');
         const authors = paper.match(/<p class="authors">([\s\S]*?)<\/p>/)?.[1];
         assert.ok(authors, 'author list is retained');
         assert.match(authors, /<strong>Karim Abdel Sadek\*?<\/strong>/);
         const href = paper.match(/<h3><a href="([^"]+)"/)?.[1];
+        assert.match(href, /^https:\/\/arxiv\.org\/abs\/\d{4}\.\d{5}$/, 'publication title opens its canonical arXiv abstract page');
+        const paperResource = actualRecords[index].resources.find(([, label]) => label === 'Paper');
+        assert.match(paperResource[0], /^https:\/\/arxiv\.org\/pdf\/\d{4}\.\d{5}$/, 'Paper resource opens the canonical arXiv PDF');
+        assert.equal(new URL(href).pathname.split('/').at(-1), new URL(paperResource[0]).pathname.split('/').at(-1), 'title and PDF resource point to the same unchanged arXiv paper ID');
         assert.ok(starredAuthorsByPaper.has(href), 'paper has a known contribution-marker group');
         const expectedStarredAuthors = starredAuthorsByPaper.get(href);
         const starredAuthors = authors.replace(/<[^>]+>/g, '').split(',').map(name => name.trim()).filter(name => name.endsWith('*'));
@@ -290,7 +304,7 @@ test('Publications retain five compact paper records and correct contribution st
     }
     assert.doesNotMatch(publications, /TL;?DR|abstract|disclosure|<details\b|<summary\b|<script\b/i);
     assert.match(papers[0], /Learning the Preferences of a Learning Agent/);
-    assert.match(papers[0], /href="https:\/\/arxiv\.org\/pdf\/2605\.09217"/);
+    assert.match(papers[0], /href="https:\/\/arxiv\.org\/abs\/2605\.09217"/);
     assert.doesNotMatch(publications, /<a\b[^>]*href="https?:\/\/(?:www\.)?openreview\.net\//i);
     assert.doesNotMatch(publications, /Equal contribution|class="[^"]*publication-note/);
 });

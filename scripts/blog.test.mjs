@@ -171,7 +171,7 @@ test('Home presents introduction, research, background, and contact without dupl
     assert.match(paragraphs[0], /<a href="https:\/\/bair\.berkeley\.edu\/">BAIR<\/a>/);
     assert.match(paragraphs[3], /^Please reach out/);
     assert.match(paragraphs[3], /karimabdel at berkeley dot edu/);
-    assert.match(paragraphs[3], /karimabdel at berkeley dot edu\.<br>\s*If you are an undergrad/);
+    assert.match(paragraphs[3], /karimabdel at berkeley dot edu\.<br><br>\s*If you are an undergrad/);
     assert.match(paragraphs[3], /<a href="undergraduate-research\.html"[^>]*>read this<\/a>/);
     assert.equal([...home.matchAll(/I am broadly interested in/g)].length, 1);
     assert.equal(paragraphs.filter(paragraph => /^I completed my (?:BSc|MSc)/.test(paragraph)).length, 1);

@@ -156,12 +156,12 @@ test('Home presents introduction, research, background, and contact without dupl
     ]);
     assert.match(paragraphs[1], /I aspire for my work to be a mix of theory and practice/);
     const background = paragraphs[2].replace(/<[^>]+>/g, '');
-    assert.match(background, /^I completed my BSc in Mathematics and Computer Science at Bocconi University/);
+    assert.match(background, /^I graduated with a BSc in Mathematics from Bocconi University/);
     assert.ok(background.indexOf('BSc') < background.indexOf('MSc'), 'background starts with BSc before MSc');
     for (const name of ['Marek Eliáš', 'Georgia Tech', 'David Krueger', 'Michael Dennis', 'Micah Carroll']) {
         assert.ok(background.includes(name), `${name} is retained in the background`);
     }
-    assert.match(paragraphs[2], /at Bocconi University, where/);
+    assert.match(paragraphs[2], /from Bocconi University, where/);
     const biographyLinks = [...about.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/g)]
         .map(([, label]) => label.replace(/<[^>]+>/g, '').trim());
     for (const label of biographyLinks) {
@@ -175,8 +175,9 @@ test('Home presents introduction, research, background, and contact without dupl
     assert.match(paragraphs[3], /karimabdel at berkeley dot edu\.<br><br>\s*If you are an undergrad/);
     assert.match(paragraphs[3], /<a href="undergraduate-research\.html"[^>]*>read this<\/a>/);
     assert.equal([...home.matchAll(/I am broadly interested in/g)].length, 1);
-    assert.equal(paragraphs.filter(paragraph => /^I completed my (?:BSc|MSc)/.test(paragraph)).length, 1);
-    assert.equal([...home.matchAll(/I completed my BSc/g)].length, 1);
+    assert.equal(paragraphs.filter(paragraph => /^(?:I graduated with a BSc|I completed my (?:BSc|MSc))/.test(paragraph)).length, 1);
+    assert.equal([...home.matchAll(/I graduated with a BSc/g)].length, 1);
+    assert.doesNotMatch(home, /I completed my BSc|BSc in Mathematics and Computer Science/);
     assert.equal([...home.matchAll(/I completed my MSc/g)].length, 1);
     assert.equal([...home.matchAll(/id="research"/g)].length, 1, 'existing research fragment remains available');
     assert.doesNotMatch(home, /id="research-heading"|Recently, I have been mostly excited|Before starting my PhD, I spent time/);

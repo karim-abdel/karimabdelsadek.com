@@ -161,6 +161,14 @@ test('Home presents introduction, research, background, and contact without dupl
     for (const name of ['Marek Eliáš', 'Georgia Tech', 'David Krueger', 'Michael Dennis', 'Micah Carroll']) {
         assert.ok(background.includes(name), `${name} is retained in the background`);
     }
+    const cambridgeCollaborators = paragraphs[2].match(/University of Cambridge \(with ([\s\S]*?)\)/)?.[1];
+    assert.ok(cambridgeCollaborators, 'Cambridge collaborators are retained together in parentheses');
+    assert.deepEqual([...cambridgeCollaborators.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)].map(([, href, label]) => [href, label]), [
+        ['https://davidscottkrueger.com/', 'David Krueger'],
+        ['https://uzman-anwar.github.io/', 'Usman Anwar'],
+        ['https://michaeldennis.ai/', 'Michael Dennis']
+    ], 'all three Cambridge names link to their webpages in the requested order');
+    assert.equal(cambridgeCollaborators.replace(/<[^>]+>/g, ''), 'David Krueger, Usman Anwar, and Michael Dennis');
     assert.match(paragraphs[2], /from Bocconi University, where/);
     const biographyLinks = [...about.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/g)]
         .map(([, label]) => label.replace(/<[^>]+>/g, '').trim());

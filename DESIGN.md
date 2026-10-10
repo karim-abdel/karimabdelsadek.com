@@ -31,9 +31,9 @@ Keep the preferred stacked structure, with a centered reading column and balance
 - No contact footer; the homepage profile row is the single place for those links.
 - Portrait uses `images/profile-no-drink.png` at 160px, increased from 135px. Preserve the existing top-aligned square crop ending around the elbow/mid-arm, CSS grayscale, and background blending. No frame or circle. The previous image is kept separately as a backup.
 - Publications remain plain research records, no cards. Metadata and resource links are indented 18px beneath each title, with 32px between records and 36px between year groups. Year headings are a quieter 17px; titles remain 19px.
-- The homepage Selected papers heading includes a 16px, regular-weight "(all papers)" link beside the 22px heading. No News section or secondary publications link below the two-item shortlist.
+- The homepage Selected papers heading includes a 16px, regular-weight "(all papers)" link beside the 22px heading. No News section or secondary publications link below the three-item shortlist.
 - Each selected paper has a 17px linked title followed by a 15px author list and conference on separate lines. Authors and conference share an 18px indent relative to the title. Retain list bullets, use 22px between papers, and match author names/order to the full publications page.
-- All five publications contain titles, authors, venues, and resource links only. TL;DR and Abstract sections and their JavaScript controls were removed at Karim's request. Omit OpenReview links and the equal-contribution footer note, but retain the author asterisks specified in PRODUCT.md.
+- All six publications contain titles, authors, venues, and resource links only. TL;DR and Abstract sections and their JavaScript controls were removed at Karim's request. Omit OpenReview links and the equal-contribution footer note, but retain the author asterisks specified in PRODUCT.md.
 - Karim's name in each publication author list is 600-weight dark ink against the muted 400-weight coauthors.
 - The undergraduate-research page includes a plain "← Back to home" link beneath its content, using the existing back-link treatment.
 

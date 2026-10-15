@@ -32,7 +32,7 @@ function assertMinimalNavigation(html) {
         { href: 'publications.html', label: 'Publications' }
     ]);
     assert.doesNotMatch(html, /<footer\b|class="footer-links"/);
-    assert.match(html, /href="(?:\.\.\/\.\.\/)?style\.css\?v=19"/);
+    assert.match(html, /href="(?:\.\.\/\.\.\/)?style\.css\?v=20"/);
 }
 
 test('empty blogs and drafts produce no invented public posts', async t => {
@@ -63,7 +63,7 @@ test('posts sort newest first, escape metadata, and preserve rich Markdown and r
     assert.match(index, /Newer &lt;&amp;&gt; &quot;Title&quot;/);
     assert.match(index, /A &quot;quote&quot; &amp; &lt;summary&gt;/);
     const html = await readFile(path.join(root, 'blog/newer/index.html'), 'utf8');
-    assert.match(html, /href="\.\.\/\.\.\/style\.css\?v=19"/);
+    assert.match(html, /href="\.\.\/\.\.\/style\.css\?v=20"/);
     assert.match(html, /href="\.\.\/\.\.\/blog\.html">All posts<\/a>/);
     assert.doesNotMatch(html, /aria-current=/);
     assert.match(html, /href="\.\.\/\.\.\/publications\.html"/);
@@ -99,13 +99,13 @@ test('blog index and articles share minimal navigation, no repeated footer links
     assert.match(article, /<h1>Layout check<\/h1>\s*<p class="post-date"><time datetime="2026-09-04">September 4, 2026<\/time><\/p>\s*<\/header>\s*<div class="content-column">\s*<div class="post-body">\s*<p>A paragraph\.<\/p>\s*<\/div>\s*<p class="back-link"><a href="\.\.\/\.\.\/blog\.html">All posts<\/a><\/p>\s*<\/div>\s*<\/article>/);
 });
 
-test('Home stacks its name above unique profile links; Home and Publications use the shared minimal shell', async () => {
+test('Home sets its name and unique profile links beside the portrait; Home and Publications use the shared minimal shell', async () => {
     const home = await readFile(path.join(siteRoot, 'index.html'), 'utf8');
     const publications = await readFile(path.join(siteRoot, 'publications.html'), 'utf8');
     for (const html of [home, publications]) assertMinimalNavigation(html);
     const heading = home.match(/<header class="page-heading home-heading">([\s\S]*?)<\/header>/)?.[1];
     assert.ok(heading, 'homepage heading is present');
-    assert.match(heading, /<h1>Karim Abdel Sadek<\/h1>\s*<nav class="contact-links" aria-label="Profile links">/);
+    assert.match(heading, /^\s*<figure class="portrait">[\s\S]*?<\/figure>\s*<div class="home-name">\s*<h1>Karim Abdel Sadek<\/h1>\s*<nav class="contact-links" aria-label="Profile links">[\s\S]*?<\/nav>\s*<\/div>\s*$/, 'portrait sits beside one name-and-links group');
     assert.doesNotMatch(heading, /class="identity-row"/);
     assert.equal([...heading.matchAll(/<h1\b/g)].length, 1, 'homepage name is not duplicated');
     assert.doesNotMatch(home, /<h[1-6][^>]*>\s*hi\s*<\/h[1-6]>/i);
@@ -126,16 +126,16 @@ test('Home stacks its name above unique profile links; Home and Publications use
     assert.match(publications, /href="publications\.html" aria-current="page"/);
 });
 
-test('the shared shell is wider and centered on desktop and mobile', async () => {
+test('the shared shell is centered and starts near the top on desktop and mobile', async () => {
     const stylesheet = await readFile(path.join(siteRoot, 'style.css'), 'utf8');
     const shell = stylesheet.match(/\.site-shell\s*\{([^}]*)\}/)?.[1];
     assert.ok(shell, 'shared shell rule is present');
-    assert.match(shell, /(?:^|;)\s*width:\s*680px\s*;/);
+    assert.match(shell, /(?:^|;)\s*width:\s*720px\s*;/);
     assert.match(shell, /(?:^|;)\s*max-width:\s*calc\(100%\s*-\s*48px\)\s*;/);
-    assert.match(shell, /(?:^|;)\s*margin:\s*64px\s+auto\s+88px\s*;/);
+    assert.match(shell, /(?:^|;)\s*margin:\s*32px\s+auto\s+72px\s*;/);
     const mobileShell = stylesheet.match(/@media\s*\(max-width:\s*800px\)\s*\{\s*\.site-shell\s*\{([^}]*)\}/)?.[1];
     assert.ok(mobileShell, 'mobile shell adjustment is present');
-    assert.match(mobileShell, /(?:^|;)\s*margin:\s*36px\s+auto\s+64px\s*;/);
+    assert.match(mobileShell, /(?:^|;)\s*margin:\s*28px\s+auto\s+56px\s*;/);
     for (const [, rule] of stylesheet.matchAll(/\.site-shell\s*\{([^}]*)\}/g)) {
         assert.doesNotMatch(rule, /(?:^|;)\s*margin-(?:left|right):/);
         assert.doesNotMatch(rule, /(?:^|;)\s*margin:\s*(?:56px\s+0\s+88px\s+120px|36px\s+24px\s+64px)\s*;/);

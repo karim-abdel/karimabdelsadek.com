@@ -32,7 +32,7 @@ function assertMinimalNavigation(html) {
         { href: 'publications.html', label: 'Publications' }
     ]);
     assert.doesNotMatch(html, /<footer\b|class="footer-links"/);
-    assert.match(html, /href="(?:\.\.\/\.\.\/)?style\.css\?v=22"/);
+    assert.match(html, /href="(?:\.\.\/\.\.\/)?style\.css\?v=23"/);
 }
 
 test('empty blogs and drafts produce no invented public posts', async t => {
@@ -63,7 +63,7 @@ test('posts sort newest first, escape metadata, and preserve rich Markdown and r
     assert.match(index, /Newer &lt;&amp;&gt; &quot;Title&quot;/);
     assert.match(index, /A &quot;quote&quot; &amp; &lt;summary&gt;/);
     const html = await readFile(path.join(root, 'blog/newer/index.html'), 'utf8');
-    assert.match(html, /href="\.\.\/\.\.\/style\.css\?v=22"/);
+    assert.match(html, /href="\.\.\/\.\.\/style\.css\?v=23"/);
     assert.match(html, /href="\.\.\/\.\.\/blog\.html">All posts<\/a>/);
     assert.doesNotMatch(html, /aria-current=/);
     assert.match(html, /href="\.\.\/\.\.\/publications\.html"/);
@@ -136,6 +136,7 @@ test('the shared shell is wider and centered on desktop and mobile', async () =>
     const mobileShell = stylesheet.match(/@media\s*\(max-width:\s*800px\)\s*\{\s*\.site-shell\s*\{([^}]*)\}/)?.[1];
     assert.ok(mobileShell, 'mobile shell adjustment is present');
     assert.match(mobileShell, /(?:^|;)\s*margin:\s*36px\s+auto\s+64px\s*;/);
+    assert.match(stylesheet, /@media\s*\(min-width:\s*801px\)\s*\{\s*html\s*\{\s*zoom:\s*0\.8;\s*\}\s*\}/, 'laptops and desktops render at 80%; phones keep full size');
     for (const [, rule] of stylesheet.matchAll(/\.site-shell\s*\{([^}]*)\}/g)) {
         assert.doesNotMatch(rule, /(?:^|;)\s*margin-(?:left|right):/);
         assert.doesNotMatch(rule, /(?:^|;)\s*margin:\s*(?:56px\s+0\s+88px\s+120px|36px\s+24px\s+64px)\s*;/);

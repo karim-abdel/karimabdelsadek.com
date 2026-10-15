@@ -84,6 +84,10 @@ h3 { font-size: 19px; font-weight: 600; line-height: 1.45; }
 .post-body th, .post-body td { min-width: 120px; padding: 8px 14px; border: 1px solid var(--rule); text-align: left; overflow-wrap: normal; word-break: normal; }
 .post-body hr { border: 0; border-top: 1px solid var(--rule); margin-block: 28px; }
 .back-link { display: inline-block; margin-top: 28px; }
+/* Laptops and desktops render the whole page at 80%, matching the zoom Karim prefers; phones keep full size. */
+@media (min-width: 801px) {
+    html { zoom: 0.8; }
+}
 @media (max-width: 800px) {
     .site-shell { margin: 36px auto 64px; }
 }

@@ -245,7 +245,7 @@ test('Publications retain six compact paper records and correct contribution sta
         .map(([, content]) => content);
     assert.equal(papers.length, 6);
     const starredAuthorsByPaper = new Map([
-        [progressiveMisalignmentUrl, ['Federico Di Gennaro*', 'Karim Abdel Sadek*']],
+        [progressiveMisalignmentUrl, ['Karim Abdel Sadek*', 'Federico Di Gennaro*']],
         ['https://arxiv.org/abs/2605.09217', ['Karim Abdel Sadek*', 'Mark Bedaywi*', 'Rhys Gould*']],
         ['https://arxiv.org/abs/2507.03068', ['Karim Abdel Sadek*', 'Matthew Farrugia-Roberts*']],
         ['https://arxiv.org/abs/2410.18952', ['Jort Vincenti*', 'Karim Abdel Sadek*', 'Joan Velja*', 'Matteo Nulli*']],
@@ -255,7 +255,7 @@ test('Publications retain six compact paper records and correct contribution sta
     const expectedRecords = [
         {
             title: 'Progressive Misalignment Can Emerge from Benign Recursive Self-Distillation',
-            authors: 'Federico Di Gennaro*, Karim Abdel Sadek*, Fanny Yang',
+            authors: 'Karim Abdel Sadek*, Federico Di Gennaro*, Fanny Yang',
             venue: 'Preprint',
             resources: [[progressiveMisalignmentUrl, 'Paper']]
         },

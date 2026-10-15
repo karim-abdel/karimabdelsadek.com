@@ -32,7 +32,7 @@ function assertMinimalNavigation(html) {
         { href: 'publications.html', label: 'Publications' }
     ]);
     assert.doesNotMatch(html, /<footer\b|class="footer-links"/);
-    assert.match(html, /href="(?:\.\.\/\.\.\/)?style\.css\?v=21"/);
+    assert.match(html, /href="(?:\.\.\/\.\.\/)?style\.css\?v=22"/);
 }
 
 test('empty blogs and drafts produce no invented public posts', async t => {
@@ -63,7 +63,7 @@ test('posts sort newest first, escape metadata, and preserve rich Markdown and r
     assert.match(index, /Newer &lt;&amp;&gt; &quot;Title&quot;/);
     assert.match(index, /A &quot;quote&quot; &amp; &lt;summary&gt;/);
     const html = await readFile(path.join(root, 'blog/newer/index.html'), 'utf8');
-    assert.match(html, /href="\.\.\/\.\.\/style\.css\?v=21"/);
+    assert.match(html, /href="\.\.\/\.\.\/style\.css\?v=22"/);
     assert.match(html, /href="\.\.\/\.\.\/blog\.html">All posts<\/a>/);
     assert.doesNotMatch(html, /aria-current=/);
     assert.match(html, /href="\.\.\/\.\.\/publications\.html"/);
@@ -126,16 +126,16 @@ test('Home sets its name and unique profile links beside the portrait; Home and 
     assert.match(publications, /href="publications\.html" aria-current="page"/);
 });
 
-test('the shared shell is centered and starts near the top on desktop and mobile', async () => {
+test('the shared shell is wider and centered on desktop and mobile', async () => {
     const stylesheet = await readFile(path.join(siteRoot, 'style.css'), 'utf8');
     const shell = stylesheet.match(/\.site-shell\s*\{([^}]*)\}/)?.[1];
     assert.ok(shell, 'shared shell rule is present');
-    assert.match(shell, /(?:^|;)\s*width:\s*720px\s*;/);
+    assert.match(shell, /(?:^|;)\s*width:\s*680px\s*;/);
     assert.match(shell, /(?:^|;)\s*max-width:\s*calc\(100%\s*-\s*48px\)\s*;/);
-    assert.match(shell, /(?:^|;)\s*margin:\s*32px\s+auto\s+72px\s*;/);
+    assert.match(shell, /(?:^|;)\s*margin:\s*64px\s+auto\s+88px\s*;/);
     const mobileShell = stylesheet.match(/@media\s*\(max-width:\s*800px\)\s*\{\s*\.site-shell\s*\{([^}]*)\}/)?.[1];
     assert.ok(mobileShell, 'mobile shell adjustment is present');
-    assert.match(mobileShell, /(?:^|;)\s*margin:\s*28px\s+auto\s+56px\s*;/);
+    assert.match(mobileShell, /(?:^|;)\s*margin:\s*36px\s+auto\s+64px\s*;/);
     for (const [, rule] of stylesheet.matchAll(/\.site-shell\s*\{([^}]*)\}/g)) {
         assert.doesNotMatch(rule, /(?:^|;)\s*margin-(?:left|right):/);
         assert.doesNotMatch(rule, /(?:^|;)\s*margin:\s*(?:56px\s+0\s+88px\s+120px|36px\s+24px\s+64px)\s*;/);

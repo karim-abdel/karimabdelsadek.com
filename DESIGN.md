@@ -22,7 +22,7 @@ Keep the single-column structure, with the portrait beside the name, a centered 
 ## Layout and shared elements
 
 - 680px single column, horizontally centered with automatic side margins and a 64px top margin on desktop. Text remains left-aligned.
-- Above 800px, `html { zoom: 0.8 }` renders every page at 80% (Karim's preferred browser zoom, applied for all visitors at their default 100%). All px values in this file are pre-zoom; on laptops body text appears at about 13.6px. Phones (800px and below) are not zoomed.
+- Above 800px, `html { zoom: 0.85 }` renders every page at 85% (Karim's preferred browser zoom, applied for all visitors at their default 100%; 80% was tried first and judged slightly too small). All px values in this file are pre-zoom; on laptops body text appears at about 14.5px. Phones (800px and below) are not zoomed.
 - At 800px and below, keep automatic side margins and use a 36px top margin. The column shrinks to preserve at least 24px on either side.
 - Shared plain navigation: Home and Publications only. No separate brand masthead. The blog and CV remain available without top-nav links.
 - `.page-heading`: on Home, the 160px portrait sits left of a `.home-name` group (24px name with profile links beneath), vertically centered with a 16px gap; at 480px and below the portrait is 112px with a 12px gap. Title and optional date on other pages.

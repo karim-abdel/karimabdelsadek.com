@@ -10,7 +10,7 @@ Keep a compact single-column structure, with the portrait beside the name and a 
 ## Typography and color
 
 - Klee One 400/600 for all pages, including the homepage and generated blog articles.
-- Normal capitalization. Body 17px / 1.6, 14px between paragraphs, section h2 22px, h3 19px, page titles 28px.
+- Normal capitalization. Body 16px / 1.6, 12px between paragraphs, section h2 20px, h3 17px, page titles 28px. Denser type (October 2026, after Karim pointed to dharakyu.com) so a page reads in one go.
 - Homepage name is 24px, a modest increase from 21px, followed by smaller 14px profile links beneath it. No greeting heading.
 - Selected palette: Soft sage. Background `oklch(94.7830% 0.014709 132.475)` (#EAF0E6).
 - Ink: `oklch(32.8316% 0.020662 147.866)` (#2E382F); muted text: `oklch(48.3993% 0.032691 146.632)`.
@@ -29,10 +29,10 @@ Keep a compact single-column structure, with the portrait beside the name and a 
 - `.content-section`: headings above prose and plain lists, separated by space rather than rules.
 - `.content-column`: blog content has no side offset or extra columns.
 - No contact footer; the homepage profile row is the single place for those links.
-- Portrait uses `images/profile-no-drink.png` at 128px beside the name (96px at 480px and below), reduced from the earlier stacked 160px so Home fits on one screen. Preserve the existing top-aligned square crop ending around the elbow/mid-arm, CSS grayscale, and background blending. No frame or circle. The previous image is kept separately as a backup.
-- Publications remain plain research records, no cards. Metadata and resource links are indented 18px beneath each title, with 32px between records and 36px between year groups. Year headings are a quieter 17px; titles remain 19px.
-- The homepage Selected papers heading includes a 16px, regular-weight "(all papers)" link beside the 22px heading. No News section or secondary publications link below the three-item shortlist.
-- Each selected paper has a 17px linked title followed by a 15px author list and conference on separate lines. Authors and conference share an 18px indent relative to the title. Retain list bullets, use 16px between papers, and match author names/order to the full publications page.
+- Portrait uses `images/profile-square.jpg`, a 256px tighter square crop of `images/profile-no-drink.png` (head and shoulders, raised hand kept), shown at 128px beside the name (96px at 480px and below). Keep CSS grayscale and background blending. No frame or circle. The previous image is kept separately as a backup.
+- Publications remain plain research records, no cards. Metadata and resource links are indented 18px beneath each title, with 24px between records and 30px between year groups. Year headings are a quieter 16px; titles 17px; authors, venue, and links 14px.
+- The homepage Selected papers heading includes a 15px, regular-weight "(all papers)" link beside the 20px heading. No News section or secondary publications link below the three-item shortlist.
+- Each selected paper has a 16px, 600-weight title in dark ink (linked, accent color and underline on hover, like Publications) followed by a 14px author list and conference on separate lines. Authors and conference share an 18px indent relative to the title. Retain list bullets, use 14px between papers, and match author names/order to the full publications page.
 - All six publications contain titles, authors, venues, and resource links only. TL;DR and Abstract sections and their JavaScript controls were removed at Karim's request. Omit OpenReview links and the equal-contribution footer note, but retain the author asterisks specified in PRODUCT.md.
 - Karim's name in each publication author list is 600-weight dark ink against the muted 400-weight coauthors.
 - The undergraduate-research page includes a plain "← Back to home" link beneath its content, using the existing back-link treatment.

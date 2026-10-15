@@ -32,7 +32,7 @@ function assertMinimalNavigation(html) {
         { href: 'publications.html', label: 'Publications' }
     ]);
     assert.doesNotMatch(html, /<footer\b|class="footer-links"/);
-    assert.match(html, /href="(?:\.\.\/\.\.\/)?style\.css\?v=20"/);
+    assert.match(html, /href="(?:\.\.\/\.\.\/)?style\.css\?v=21"/);
 }
 
 test('empty blogs and drafts produce no invented public posts', async t => {
@@ -63,7 +63,7 @@ test('posts sort newest first, escape metadata, and preserve rich Markdown and r
     assert.match(index, /Newer &lt;&amp;&gt; &quot;Title&quot;/);
     assert.match(index, /A &quot;quote&quot; &amp; &lt;summary&gt;/);
     const html = await readFile(path.join(root, 'blog/newer/index.html'), 'utf8');
-    assert.match(html, /href="\.\.\/\.\.\/style\.css\?v=20"/);
+    assert.match(html, /href="\.\.\/\.\.\/style\.css\?v=21"/);
     assert.match(html, /href="\.\.\/\.\.\/blog\.html">All posts<\/a>/);
     assert.doesNotMatch(html, /aria-current=/);
     assert.match(html, /href="\.\.\/\.\.\/publications\.html"/);

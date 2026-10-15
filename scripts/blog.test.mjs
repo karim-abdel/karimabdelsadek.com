@@ -191,8 +191,8 @@ test('Home presents introduction, research, background, and contact without dupl
     assert.doesNotMatch(home, /id="research-heading"|Recently, I have been mostly excited|Before starting my PhD, I spent time/);
 });
 
-// Not on arXiv yet, so this preprint links to a public Google Drive PDF instead.
-const progressiveMisalignmentUrl = 'https://drive.google.com/file/d/1V_AGCnTGAUPtyV4SAarYy9BIiEbZ1CsW/view';
+// Not on arXiv yet, so this preprint links to the PDF hosted with the site instead.
+const progressiveMisalignmentUrl = 'papers/progressive-misalignment.pdf';
 const isPaperUrl = href => /^https:\/\/arxiv\.org\/abs\/\d{4}\.\d{5}$/.test(href) || href === progressiveMisalignmentUrl;
 
 test('Home keeps three papers with titles followed by grouped authors and venues, an inline all-papers link, and no News section', async () => {
@@ -245,7 +245,7 @@ test('Publications retain six compact paper records and correct contribution sta
         .map(([, content]) => content);
     assert.equal(papers.length, 6);
     const starredAuthorsByPaper = new Map([
-        [progressiveMisalignmentUrl, ['Karim Abdel Sadek*', 'Federico Di Gennaro*']],
+        [progressiveMisalignmentUrl, ['Federico Di Gennaro*', 'Karim Abdel Sadek*']],
         ['https://arxiv.org/abs/2605.09217', ['Karim Abdel Sadek*', 'Mark Bedaywi*', 'Rhys Gould*']],
         ['https://arxiv.org/abs/2507.03068', ['Karim Abdel Sadek*', 'Matthew Farrugia-Roberts*']],
         ['https://arxiv.org/abs/2410.18952', ['Jort Vincenti*', 'Karim Abdel Sadek*', 'Joan Velja*', 'Matteo Nulli*']],
@@ -255,7 +255,7 @@ test('Publications retain six compact paper records and correct contribution sta
     const expectedRecords = [
         {
             title: 'Progressive Misalignment Can Emerge from Benign Recursive Self-Distillation',
-            authors: 'Karim Abdel Sadek*, Federico Di Gennaro*, Fanny Yang',
+            authors: 'Federico Di Gennaro*, Karim Abdel Sadek*, Fanny Yang',
             venue: 'Preprint',
             resources: [[progressiveMisalignmentUrl, 'Paper']]
         },
@@ -410,12 +410,15 @@ test('publish directory includes only public site files and removes unpublished 
     }
     await mkdir(path.join(root, 'images'));
     await writeFile(path.join(root, 'images/portrait.jpg'), 'Image fixture.');
+    await mkdir(path.join(root, 'papers'));
+    await writeFile(path.join(root, 'papers/preprint.pdf'), 'Paper fixture.');
     await writeFile(path.join(root, 'blog/posts/published.md'), post());
     await writeFile(path.join(root, 'blog/posts/private.md'), post({ draft: true }));
     await buildSite(root);
     const destination = path.join(root, 'dist');
     await access(path.join(destination, 'blog/published/index.html'));
     await access(path.join(destination, 'images/portrait.jpg'));
+    await access(path.join(destination, 'papers/preprint.pdf'));
     assert.equal(await readFile(path.join(destination, 'undergraduate-research.html'), 'utf8'), 'Site fixture.');
     await assert.rejects(access(path.join(destination, 'publications.js')), { code: 'ENOENT' });
     await assert.rejects(access(path.join(destination, 'blog/posts')), { code: 'ENOENT' });

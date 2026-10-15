@@ -11,7 +11,7 @@ function allowedOutput(filename) {
     if (typeof filename !== 'string' || filename.includes('\\') || filename.split('/').some(part => part === '..' || part === '.' || !part)) return false;
     // Accept this retired asset only in an older manifest so the build can safely prune it.
     if (filename === 'publications.js') return true;
-    if (rootFiles.includes(filename) || filename.startsWith('images/') || filename.startsWith('blog/assets/')) return true;
+    if (rootFiles.includes(filename) || filename.startsWith('images/') || filename.startsWith('papers/') || filename.startsWith('blog/assets/')) return true;
     const parts = filename.split('/');
     return parts.length === 3 && parts[0] === 'blog' && isValidSlug(parts[1]) && parts[2] === 'index.html';
 }
@@ -38,6 +38,7 @@ export async function buildSite(root = siteRoot) {
     const outputs = new Map();
     for (const filename of rootFiles) outputs.set(filename, await readFile(path.join(root, filename)));
     await readAssets(root, 'images', outputs);
+    await readAssets(root, 'papers', outputs, true);
     await readAssets(root, 'blog/assets', outputs, true);
     for (const entry of await readdir(path.join(root, 'blog'), { withFileTypes: true })) {
         if (!entry.isDirectory() || !isValidSlug(entry.name)) continue;

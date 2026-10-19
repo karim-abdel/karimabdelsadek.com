@@ -195,7 +195,7 @@ test('Home presents introduction, research, background, and contact without dupl
 const isPaperUrl = href => /^https:\/\/arxiv\.org\/abs\/\d{4}\.\d{5}$/.test(href);
 // An oral presentation is the only parenthesized, highlighted venue note.
 const oralMarker = '<span class="oral">(Oral)</span>';
-const progressiveMisalignmentVenue = `In submission<br>Transitioning from Pre-Training to Post-Training Workshop at NeurIPS 2026 ${oralMarker}`;
+const progressiveMisalignmentVenue = `In submission<br>Workshop on Transitioning from Pre-Training to Post-Training at NeurIPS 2026 ${oralMarker}`;
 
 test('Home keeps three papers with titles followed by grouped authors and venues, an inline all-papers link, and no News section', async () => {
     const home = await readFile(path.join(siteRoot, 'index.html'), 'utf8');
@@ -264,7 +264,7 @@ test('Publications retain six compact paper records and correct contribution sta
         {
             title: 'Learning the Preferences of a Learning Agent',
             authors: 'Karim Abdel Sadek*, Mark Bedaywi*, Rhys Gould*, Stuart Russell',
-            venue: 'Multi-Agent Learning and Its Opportunities in the Era of Generative AI Workshop at ICLR 2026',
+            venue: 'Workshop on Multi-Agent Learning and Its Opportunities in the Era of Generative AI at ICLR 2026',
             resources: [['https://arxiv.org/pdf/2605.09217', 'Paper']]
         },
         {
@@ -281,7 +281,7 @@ test('Publications retain six compact paper records and correct contribution sta
         {
             title: 'Dynamic Vocabulary Pruning in Early-Exit LLMs',
             authors: 'Jort Vincenti*, Karim Abdel Sadek*, Joan Velja*, Matteo Nulli*, Metod Jazbec',
-            venue: 'Efficient Natural Language and Speech Processing Workshop at NeurIPS 2024',
+            venue: 'Workshop on Efficient Natural Language and Speech Processing at NeurIPS 2024',
             resources: [
                 ['https://arxiv.org/pdf/2410.18952', 'Paper'],
                 ['https://github.com/MatteoNulli/Vocabulary_pruning/tree/main', 'Code']

@@ -62,6 +62,7 @@ h3 { font-size: 19px; font-weight: 600; line-height: 1.45; }
 .authors { margin-top: 7px; color: var(--muted); font-size: 15px; line-height: 1.55; }
 .authors strong { color: var(--ink); font-weight: 600; }
 .venue { margin-top: 4px; font-size: 15px; font-weight: 600; }
+.oral { color: oklch(52% 0.16 28); font-weight: 600; }
 .pub-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 8px; font-size: 15px; }
 .post-list { margin: 0; padding: 0; list-style: none; }
 .post-list-item + .post-list-item { margin-top: 28px; }

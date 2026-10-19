@@ -32,7 +32,7 @@ function assertMinimalNavigation(html) {
         { href: 'publications.html', label: 'Publications' }
     ]);
     assert.doesNotMatch(html, /<footer\b|class="footer-links"/);
-    assert.match(html, /href="(?:\.\.\/\.\.\/)?style\.css\?v=24"/);
+    assert.match(html, /href="(?:\.\.\/\.\.\/)?style\.css\?v=25"/);
 }
 
 test('empty blogs and drafts produce no invented public posts', async t => {
@@ -63,7 +63,7 @@ test('posts sort newest first, escape metadata, and preserve rich Markdown and r
     assert.match(index, /Newer &lt;&amp;&gt; &quot;Title&quot;/);
     assert.match(index, /A &quot;quote&quot; &amp; &lt;summary&gt;/);
     const html = await readFile(path.join(root, 'blog/newer/index.html'), 'utf8');
-    assert.match(html, /href="\.\.\/\.\.\/style\.css\?v=24"/);
+    assert.match(html, /href="\.\.\/\.\.\/style\.css\?v=25"/);
     assert.match(html, /href="\.\.\/\.\.\/blog\.html">All posts<\/a>/);
     assert.doesNotMatch(html, /aria-current=/);
     assert.match(html, /href="\.\.\/\.\.\/publications\.html"/);
@@ -192,9 +192,10 @@ test('Home presents introduction, research, background, and contact without dupl
     assert.doesNotMatch(home, /id="research-heading"|Recently, I have been mostly excited|Before starting my PhD, I spent time/);
 });
 
-// Not on arXiv yet, so this preprint links to the PDF hosted with the site instead.
-const progressiveMisalignmentUrl = 'papers/progressive-misalignment.pdf';
-const isPaperUrl = href => /^https:\/\/arxiv\.org\/abs\/\d{4}\.\d{5}$/.test(href) || href === progressiveMisalignmentUrl;
+const isPaperUrl = href => /^https:\/\/arxiv\.org\/abs\/\d{4}\.\d{5}$/.test(href);
+// An oral presentation is the only parenthesized, highlighted venue note.
+const oralMarker = '<span class="oral">(Oral)</span>';
+const progressiveMisalignmentVenue = `In submission<br>Pre-to-Post Workshop, NeurIPS 2026 ${oralMarker}`;
 
 test('Home keeps three papers with titles followed by grouped authors and venues, an inline all-papers link, and no News section', async () => {
     const home = await readFile(path.join(siteRoot, 'index.html'), 'utf8');
@@ -226,7 +227,7 @@ test('Home keeps three papers with titles followed by grouped authors and venues
         const metadata = entry.match(/^\s*<h3 class="paper-title">\s*<a href="([^"]+)"[^>]*>([^<]+)<\/a>\s*<\/h3>\s*<div class="paper-meta">\s*<p class="paper-authors">([\s\S]*?)<\/p>\s*<p class="paper-venue">([\s\S]*?)<\/p>\s*<\/div>\s*$/);
         assert.ok(metadata, 'each title precedes one metadata group containing authors then conference');
         const [, href, title, authors, venue] = metadata;
-        assert.ok(isPaperUrl(href), 'selected paper title opens its canonical arXiv abstract page or public preprint PDF');
+        assert.ok(isPaperUrl(href), 'selected paper title opens its canonical arXiv abstract page');
         const record = records.find(publication => publication.title?.[1] === href);
         assert.ok(record, `${title} links to the same paper as its Publications record`);
         assert.equal(title, record.title[2], 'selected paper retains its full title');
@@ -234,7 +235,7 @@ test('Home keeps three papers with titles followed by grouped authors and venues
         assert.equal(normalizeWhitespace(authors), normalizeWhitespace(record.authors), `${title} retains the full author list and emphasis`);
         assert.match(authors, /<strong>Karim Abdel Sadek\*?<\/strong>/);
         assert.equal(normalizeWhitespace(venue), normalizeWhitespace(record.venue), `${title} retains its conference without added parentheses`);
-        assert.doesNotMatch(venue, /[()]/);
+        assert.doesNotMatch(venue.replace(oralMarker, ''), /[()]/);
     }
     assert.doesNotMatch(selected, /Learning the Preferences of a Learning Agent|2605\.09217/);
     assert.doesNotMatch(home, /class="more-papers"|id="news"|id="news-heading"|class="news-list"/);
@@ -246,7 +247,7 @@ test('Publications retain six compact paper records and correct contribution sta
         .map(([, content]) => content);
     assert.equal(papers.length, 6);
     const starredAuthorsByPaper = new Map([
-        [progressiveMisalignmentUrl, ['Karim Abdel Sadek*', 'Federico Di Gennaro*']],
+        ['https://arxiv.org/abs/2610.22467', ['Karim Abdel Sadek*', 'Federico Di Gennaro*']],
         ['https://arxiv.org/abs/2605.09217', ['Karim Abdel Sadek*', 'Mark Bedaywi*', 'Rhys Gould*']],
         ['https://arxiv.org/abs/2507.03068', ['Karim Abdel Sadek*', 'Matthew Farrugia-Roberts*']],
         ['https://arxiv.org/abs/2410.18952', ['Jort Vincenti*', 'Karim Abdel Sadek*', 'Joan Velja*', 'Matteo Nulli*']],
@@ -257,8 +258,8 @@ test('Publications retain six compact paper records and correct contribution sta
         {
             title: 'Progressive Misalignment Can Emerge from Benign Recursive Self-Distillation',
             authors: 'Karim Abdel Sadek*, Federico Di Gennaro*, Fanny Yang',
-            venue: 'Preprint',
-            resources: [[progressiveMisalignmentUrl, 'Paper']]
+            venue: progressiveMisalignmentVenue,
+            resources: [['https://arxiv.org/pdf/2610.22467', 'Paper']]
         },
         {
             title: 'Learning the Preferences of a Learning Agent',
@@ -316,14 +317,10 @@ test('Publications retain six compact paper records and correct contribution sta
         assert.ok(authors, 'author list is retained');
         assert.match(authors, /<strong>Karim Abdel Sadek\*?<\/strong>/);
         const href = paper.match(/<h3><a href="([^"]+)"/)?.[1];
-        assert.ok(isPaperUrl(href), 'publication title opens its canonical arXiv abstract page or public preprint PDF');
+        assert.ok(isPaperUrl(href), 'publication title opens its canonical arXiv abstract page');
         const paperResource = actualRecords[index].resources.find(([, label]) => label === 'Paper');
-        if (href === progressiveMisalignmentUrl) {
-            assert.equal(paperResource[0], href, 'Paper resource opens the same public preprint PDF');
-        } else {
-            assert.match(paperResource[0], /^https:\/\/arxiv\.org\/pdf\/\d{4}\.\d{5}$/, 'Paper resource opens the canonical arXiv PDF');
-            assert.equal(new URL(href).pathname.split('/').at(-1), new URL(paperResource[0]).pathname.split('/').at(-1), 'title and PDF resource point to the same unchanged arXiv paper ID');
-        }
+        assert.match(paperResource[0], /^https:\/\/arxiv\.org\/pdf\/\d{4}\.\d{5}$/, 'Paper resource opens the canonical arXiv PDF');
+        assert.equal(new URL(href).pathname.split('/').at(-1), new URL(paperResource[0]).pathname.split('/').at(-1), 'title and PDF resource point to the same unchanged arXiv paper ID');
         assert.ok(starredAuthorsByPaper.has(href), 'paper has a known contribution-marker group');
         const expectedStarredAuthors = starredAuthorsByPaper.get(href);
         const starredAuthors = authors.replace(/<[^>]+>/g, '').split(',').map(name => name.trim()).filter(name => name.endsWith('*'));

@@ -259,7 +259,10 @@ test('Publications retain six compact paper records and correct contribution sta
             title: 'Progressive Misalignment Can Emerge from Benign Recursive Self-Distillation',
             authors: 'Karim Abdel Sadek*, Federico Di Gennaro*, Fanny Yang',
             venue: progressiveMisalignmentVenue,
-            resources: [['https://arxiv.org/pdf/2610.22467', 'Paper']]
+            resources: [
+                ['https://arxiv.org/pdf/2610.22467', 'Paper'],
+                ['https://progressive-misalignment.github.io/', 'Project page']
+            ]
         },
         {
             title: 'Learning the Preferences of a Learning Agent',

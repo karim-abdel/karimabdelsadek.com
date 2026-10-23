@@ -1,0 +1,35 @@
+% ---------- Packages ----------
+\usepackage[a4paper,margin=1.4cm]{geometry}      % slightly narrower margins
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}                            % Times‑like serif
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref,xcolor,ulem}
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{textcomp}
+\usepackage{needspace}                           % keep headers with their content
+ \newcommand{\mytexttilde}{\raisebox{0.5ex}{\texttildelow}}
+
+\setstretch{1.02}                                 % tighter line spacing
+
+% Tighter default lists
+\setlist[itemize]{noitemsep, topsep=1pt, leftmargin=1.2em}
+
+% ---------- Section header ----------
+\newcommand{\SectionHeader}[1]{%
+  \Needspace{5\baselineskip}%
+  \vspace{0.6\baselineskip}%
+  \noindent\textbf{\uppercase{#1}}\par
+  \vspace{0.15\baselineskip}\hrule\vspace{0.5\baselineskip}%
+}
+
+% ---------- Entry macro ----------
+\newcommand{\Entry}[5]{%
+  \noindent\textbf{#1}\hfill\textbf{#2}\\[-2pt]%
+  \textit{#3}\hfill\textit{#4}\\%
+  #5\par\vspace{0.5\baselineskip}%
+}
+

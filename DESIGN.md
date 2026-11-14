@@ -30,7 +30,7 @@ Keep the single-column structure, with the portrait beside the name, a centered 
 - `.content-section`: headings above prose and plain lists, separated by space rather than rules.
 - `.content-column`: blog content has no side offset or extra columns.
 - No contact footer; the homepage profile row is the single place for those links.
-- Portrait uses `images/profile-no-drink.png` at 160px, increased from 135px. Preserve the existing top-aligned square crop ending around the elbow/mid-arm, CSS grayscale, and background blending. No frame or circle. The previous image is kept separately as a backup.
+- Portrait uses `images/profile-face.jpg` (a 320px square face-only headshot cropped from the top of Karim's chosen photo `Desktop/me/Pictures Karim/IMG_0126.heic`) at 160px, beside the name. Shown in full color, uncropped at 4:5 (160×200px; 112×140px at 480px and below), with no grayscale filter or blend. No frame or circle. The earlier Berlin portraits (`profile-no-drink.png`, `profile-cutout.png`, `Profile_Pic_Berlin.jpg`) are kept as backups.
 - Publications remain plain research records, no cards. Metadata and resource links are indented 18px beneath each title, with 32px between records and 36px between year groups. Year headings are a quieter 17px; titles remain 19px.
 - The homepage Selected papers heading includes a 16px, regular-weight "(all papers)" link beside the 22px heading. No News section or secondary publications link below the three-item shortlist.
 - Each selected paper has a 17px linked title followed by a 15px author list and conference on separate lines. Authors and conference share an 18px indent relative to the title. Retain list bullets, use 22px between papers, and match author names/order to the full publications page.

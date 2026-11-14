@@ -40,7 +40,7 @@ h3 { font-size: 19px; font-weight: 600; line-height: 1.45; }
 .home-heading h1 { font-size: 24px; }
 .home-name { min-width: 0; }
 .portrait { flex: none; width: 160px; }
-.portrait img { display: block; width: 160px; height: 160px; object-fit: cover; object-position: center top; filter: grayscale(1) contrast(1.05) brightness(1.15); mix-blend-mode: multiply; }
+.portrait img { display: block; width: 160px; height: 200px; object-fit: cover; object-position: center top; }
 .contact-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 18px; font-size: 14px; }
 .content-section { margin-top: 28px; }
 .about { margin-top: 0; }
@@ -94,7 +94,7 @@ h3 { font-size: 19px; font-weight: 600; line-height: 1.45; }
 }
 @media (max-width: 480px) {
     .home-heading { gap: 12px; }
-    .portrait, .portrait img { width: 112px; height: 112px; }
+    .portrait, .portrait img { width: 112px; height: 140px; }
 }
 @media (max-width: 380px) {
     .site-nav { column-gap: 18px; }
